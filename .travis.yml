@@ -1,0 +1,11 @@
+sudo: required # We need root rights
+language: generic
+
+services:
+  - docker # We need docker-cli
+
+before_install:
+  - docker build -t martward/docker-react -f Dockerfile.dev . 
+
+script:
+  - docker run -e CI=true martward/docker-react npm run test -- --coverage
